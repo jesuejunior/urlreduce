@@ -3,6 +3,28 @@
 {% block container %}
 <h3>Minha lista de URL reduzidas, olha que lindo...</h3>
 <br>
-<div id="listar-render"></div>
+<div id="listar-render">
 
+{% for link in links %}
+    <div>{{ link.url_hash }}</div><div>{{ link.url }}</div>
+{% endfor %}
+
+</div>
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if links.has_previous %}
+                <a href="?page={{ links.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ links.number }} de {{ links.paginator.num_pages }}.
+            </span>
+
+            {% if links.has_next %}
+                <a href="?page={{ links.next_page_number }}">próxima</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
