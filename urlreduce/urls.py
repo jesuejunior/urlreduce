@@ -10,7 +10,8 @@ from reducer.views import HomeTemplateView, MyLinksTemplateView
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', HomeTemplateView.as_view(), name='home'),
-    url(r'^$', MyLinksTemplateView.as_view(), name='my-links'),
+    url(r'^my-links/$', MyLinksTemplateView.as_view(), name='my-links'),
+    url(r'^(?P<hash>\-\d\w]+)$', GoToRedirectView.as_view(), name='goto-redirect'),
 
     # url(r'^urlreduce/', include('urlreduce.foo.urls')),
 
