@@ -1,0 +1,88 @@
+# python ignores bootstrap
+*.pyc
+*.swp
+*~
+cscope*
+*.pyo
+_build
+.coverage
+.DS_Store
+.ropeproject
+*.py[co]
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+var
+sdist
+develop-eggs
+.installed.cfg
+conf_local.py
+
+# Installer logs
+pip-log.txt
+
+# Thumbnails
+*.db
+
+# Unit test / coverage reports
+.coverage
+.tox
+
+#Mr Developer
+.mr.developer.cfg
+
+# pasta temporaria usada na exportacao
+wetl/tasks/export/temp/
+
+# Arquivos do PyDev
+.pydevproject
+
+# PyCharm
+.idea/*
+/.idea
+
+#Jpipe
+hs_err*
+
+# SIEVE
+settings_local.py
+gunicorn_local.py
+celerycam.log
+celeryd.log
+celeryev.pid
+settings_local_arq.py
+settings_local_prod.py
+static/admin
+celerybeat.pid
+
+static
+protected
+lib/include/greenlet.h
+
+#Diretorio de upload de tickets do bug
+
+nohup.out
+#logs
+*log-*.log
+*.log.*
+*.pid
+
+# Teremos apenas um symlink vindo de etc/
+./supervisord.conf
+jobs/supervisord.conf
+cdp/supervisord.conf
+
+# Fixture para testes da baseproduto
+fixtures_para_testar_baseproduto.json
+
+# Jenkins
+junit-baseproduto.xml
+
+# Node
+.grunt
+node_modules
+runner.html
