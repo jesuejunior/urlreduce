@@ -1,0 +1,16 @@
+{% extends "menu.html" %}
+
+{% block container %}
+
+<form method="post" action="" class="form-signin text-center" style="max-width: 550px;margin:0 auto">
+	{% csrf_token %}
+        <h2 class="form-signin-heading">Entrar</h2>
+        <input id="id_username" maxlength="254" name="username" type="text" class="form-control" placeholder="login" autofocus="">
+        
+        <input id="id_password" maxlength="4096" name="password" type="password" class="form-control" placeholder="senha">
+
+        <input type="submit" value="login" class="btn btn-lg btn-primary btn-block"/>
+
+      </form>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    {% if not user.is_authenticated %}
+        <div class="navbar-form navbar-right">
+            <!-- estou usando o django-registration -->
+           <a class="btn btn-success btn-text-black" href="{% url 'auth_login' %}">Entrar</a>
+           <a class="btn btn-success btn-text-black" href="{% url 'registration_register' %}">Cadastrar</a>
+        </div>
+    {% else %}
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'my-links' %}">Meus Links</a></li>
+            </ul>
+            <div class="navbar-form navbar-right">
+                <span class="btn btn-sm btn-inverse">
+                    Olá {{ user.username }}
+                </span>
+                <a class="btn btn-sm btn-success btn-text-black" href="{% url 'auth_logout' %}">Sair</a>
+            </div>
+        </div>
+     {% endif %}
+{% endblock %}

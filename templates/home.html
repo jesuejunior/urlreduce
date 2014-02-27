@@ -1,0 +1,20 @@
+{% extends 'menu.html' %}
+{% load staticfiles %}
+{% block container %}
+
+    <div class="jumbotron">
+        <h2>URLReduce <i><span class="lead">Venha diminuir a quantidade de caracteres da sua URL.</span></i></h2>
+        <p class="lead">Compartilhe nas redes sociais e seja visto e lembrado por ai...</p>
+
+        <form action="" method="post">
+                {% csrf_token %}
+                <label>{{ form_url.url }}</label>
+                <input class="btn btn-lg btn-success" type="submit" id="shorten-it" value="Manda ver!">
+        </form>
+    </div>
+    {% ifequal link '500' %}
+        <div class="alert alert-warning"> Tá de brincation with cara? URL Invalida..</div>
+    {% else %}
+        <div> {{ link.url }}</div>
+    {% endifequal %}
+{% endblock %}
