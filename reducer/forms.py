@@ -5,7 +5,7 @@ __author__ = 'jesuejunior'
 
 class ReduceURLForm(ModelForm):
     url = URLField(widget=TextInput(attrs={
-        'placeholder': 'Digite a URL aqui.',
+        'placeholder': 'Digite ou cole a URL aqui.',
     }))
 
     class Meta:
