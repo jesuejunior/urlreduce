@@ -1,6 +1,8 @@
 #encoding: utf-8
+import urllib2
 from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 from django.template.response import TemplateResponse
+from django.views.defaults import page_not_found
 from common.login_required_mixin import LoginRequiredMixin
 from reducer.forms import ReduceURLForm
 from django.views.generic import View, TemplateView, RedirectView
@@ -48,7 +50,6 @@ class HomeTemplateView(View):
         return cxt
 
 
-
 class MyLinksTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'my-links.html'
     def get(self, request, *args, **kwargs):
@@ -68,4 +69,10 @@ class MyLinksTemplateView(LoginRequiredMixin, TemplateView):
 
 class GoToRedirectView(RedirectView):
     def get(self, request, *args, **kwargs):
-        url_hash = kwargs.get()
+        url_hash = kwargs.get('url_hash')
+        try:
+            link = a = Link.objects.decode(url_hash)
+            self.url = urllib2.unquote(link)
+            return super(GoToRedirectView, self).get(request, *args, **kwargs)
+        except Link.DoesNotExist:
+            return page_not_found(request)

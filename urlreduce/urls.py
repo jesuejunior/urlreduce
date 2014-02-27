@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import RedirectView
-from reducer.views import HomeTemplateView, MyLinksTemplateView
+from reducer.views import HomeTemplateView, MyLinksTemplateView, GoToRedirectView
 
 
 # Uncomment the next two lines to enable the admin:
@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', HomeTemplateView.as_view(), name='home'),
     url(r'^my-links/$', MyLinksTemplateView.as_view(), name='my-links'),
-    url(r'^(?P<hash>\-\d\w]+)$', GoToRedirectView.as_view(), name='goto-redirect'),
+    url(r'^(?P<url_hash>[\w]+)$', GoToRedirectView.as_view()),
 
     # url(r'^urlreduce/', include('urlreduce.foo.urls')),
 
