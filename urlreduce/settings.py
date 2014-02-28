@@ -169,7 +169,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
-LOGIN_REDIRECT_URL = '/my-links'
+LOGIN_REDIRECT_URL = '/my-links/'
 
 try:
     from .settings_local import *
