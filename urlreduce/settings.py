@@ -1,6 +1,7 @@
 #encoding: utf-8
 # Django settings for urlreduce project.
 import os
+import sys
 
 PROJECT_DIR = os.path.dirname(__file__)
 DEBUG = True
@@ -97,7 +98,6 @@ TEMPLATE_DIRS = (
     os.path.join('templates/'),
 )
 
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,21 +128,39 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
         },
-    }
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['jj_console'],
+            'propagate': True,
+        }
+    },
+    'formatters': {
+        'simple_format': {
+            'format': '{%(levelname)s:%(asctime)s - %(funcName)s:%(lineno)d -  %(threadName)s:%(message)s}'
+        },
+    },
+
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'jj_console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple_format',
+            'stream': sys.stdout,
+        },
+    },
 }
+
 
 
 # django-register
@@ -151,4 +169,3 @@ ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 LOGIN_REDIRECT_URL = '/my-links'
-REGISTER_REDIRECT_URL = '/accounts/login/'
