@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', HomeTemplateView.as_view(), name='home'),
     url(r'^my-links/$', MyLinksTemplateView.as_view(), name='my-links'),
-    url(r'^(?P<url_hash>[\w]+)$', GoToRedirectView.as_view()),
+    url(r'^(?P<url_hash>[\W\w]+)$', GoToRedirectView.as_view()),
 
     # url(r'^urlreduce/', include('urlreduce.foo.urls')),
 
