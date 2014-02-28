@@ -12,9 +12,12 @@
                 <input class="btn btn-lg btn-success" type="submit" id="shorten-it" value="Manda ver!">
         </form>
     </div>
-    {% ifequal link '500' %}
+    {% if link == '500' %}
         <div class="alert alert-warning"> Tá de brincation with cara? URL Invalida..</div>
-    {% else %}
-        <div> {{ link.url }}</div>
-    {% endifequal %}
+    {% elif link %}
+        <div class="=alert alert-success">
+            <p>URL reduzida: <a style="color: #000000"  target="_blank" href="{{ link.url_hash }}">{{ link.url_hash }}</a></p>
+            <p>URL Referida: {{ link.url }}</p>
+        </div>
+    {% endif %}
 {% endblock %}

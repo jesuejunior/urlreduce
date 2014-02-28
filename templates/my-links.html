@@ -4,11 +4,24 @@
 <h3>Minha lista de URL reduzidas, olha que lindo...</h3>
 <br>
 <div id="listar-render">
-
+    <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>URL Reduzida</th>
+                  <th>URL Original</th>
+                </tr>
+              </thead>
+              <tbody>
 {% for link in links %}
-    <div>{{ link.url_hash }}</div><div>{{ link.url }}</div>
+        <tr>
+          <td>{{ link.count }}</td>
+          <td><a style="color: #000000" target="_blank" href="{% url 'home' %}{{ link.url_hash }}">{{ link.url_hash }}</a></td>
+          <td>{{ link.url }}</td>
+        </tr>
 {% endfor %}
-
+            </tbody>
+    </table>
 </div>
 
 
