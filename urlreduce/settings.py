@@ -162,6 +162,7 @@ LOGGING = {
 }
 
 
+APPEND_SLASH = True
 
 # django-register
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -169,3 +170,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 LOGIN_REDIRECT_URL = '/my-links'
+
+try:
+    from .settings_local import *
+except ImportError:
+    print u'O arquivo .settings_local.py nao foi encontrado para o settings padrao'
