@@ -13,15 +13,11 @@ class LinkManager(models.Manager):
     def decode(self, hash):
         return self.get(url_hash=hash).url
 
-    def owner(self, user):
-        return self.filter(user=user)
-
 class Link(models.Model):
-    url_hash = models.CharField(max_length=255, blank=True, null=True)
+    url_hash = models.CharField(max_length=255, blank=True, null=True, unique=True)
     url = models.URLField()
     dt_created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
-
     objects = LinkManager()
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
@@ -45,3 +41,8 @@ class Link(models.Model):
 
     def __unicode__(self):
         return self.url
+
+#nao implementada
+class Owner(models.Model):
+    link = models.ForeignKey(Link)
+    owners = models.ManyToManyField(User, related_name='owners', db_table='owner_has_link', null=True, blank=True)
