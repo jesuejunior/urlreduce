@@ -30,13 +30,16 @@ class HomeTemplateView(View):
             req[u'user'] = request.user.pk
 
         form = ReduceURLForm(req)
-
+        #Não deixar cadastrar URL repetida economia de disco/memoria
         if form.is_valid():
-            link = form.save()
+            link = Link.objects.filter(url=form.cleaned_data['url'])
+            if not link:
+                link = form.save()
             cxt['link'] = link.to_dict()
         else:
             cxt['link'] = '500'
-
+        #TODO - Se a url já estiver cadastrada o dono não muda e as urls existente só
+        #TODO - aparece para a primeira pessoa, pensar como corrigir isso
         return TemplateResponse(
             request=self.request,
             template=self.template_name,
@@ -71,7 +74,7 @@ class GoToRedirectView(RedirectView):
     def get(self, request, *args, **kwargs):
         url_hash = kwargs.get('url_hash')
         try:
-            link = a = Link.objects.decode(url_hash)
+            link = Link.objects.decode(url_hash)
             self.url = urllib2.unquote(link)
             return super(GoToRedirectView, self).get(request, *args, **kwargs)
         except Link.DoesNotExist:
