@@ -6,7 +6,7 @@ from django.views.defaults import page_not_found
 from common.login_required_mixin import LoginRequiredMixin
 from reducer.forms import ReduceURLForm
 from django.views.generic import View, TemplateView, RedirectView
-from reducer.models import Link
+from reducer.models import Link, Owner
 
 
 class HomeTemplateView(View):
@@ -24,8 +24,8 @@ class HomeTemplateView(View):
     def post(self, request, *args, **kwargs):
         cxt = self.get_context_data()
         req = request.POST
-
-        if request.user.is_authenticated():
+        authenticated = request.user.is_authenticated()
+        if authenticated:
             req = req.copy()
             req[u'user'] = request.user.pk
 
@@ -33,8 +33,14 @@ class HomeTemplateView(View):
         #Não deixar cadastrar URL repetida economia de disco/memoria
         if form.is_valid():
             link = Link.objects.filter(url=form.cleaned_data['url'])
+            link = link[0] if link else None
             if not link:
                 link = form.save()
+
+            if authenticated:
+                owner, created = Owner.objects.get_or_create(link=link)
+                owner.owners.add(request.user)
+
             cxt['link'] = link.to_dict()
         else:
             cxt['link'] = '500'
@@ -56,7 +62,7 @@ class HomeTemplateView(View):
 class MyLinksTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'my-links.html'
     def get(self, request, *args, **kwargs):
-        links = Link.objects.owner(request.user)
+        links = Link.objects.filter(owner__owners=request.user)
         paginator = Paginator(links, 2)
 
         page = request.GET.get('page')
