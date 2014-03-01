@@ -1,4 +1,5 @@
 from unittest import TestCase
+from django.contrib.auth.models import User
 from django.db import models
 from reducer.models import Link, Owner
 
@@ -34,3 +35,9 @@ class OwnerModelTest(TestCase):
     def test_owners(self):
         owner = Owner._meta.get_field_by_name('link')[0]
         self.assertEquals(owner.__class__, models.ForeignKey)
+
+class UseruModelTest(TestCase):
+    def test_username(self):
+        user = User._meta.get_field_by_name('username')[0]
+        self.assertEquals(user.max_length, 30)
+        self.assertTrue(user.unique)
