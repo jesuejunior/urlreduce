@@ -63,7 +63,7 @@ class MyLinksTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'my-links.html'
     def get(self, request, *args, **kwargs):
         links = Link.objects.filter(owner__owners=request.user)
-        paginator = Paginator(links, 2)
+        paginator = Paginator(links, 10)
 
         page = request.GET.get('page')
         try:
