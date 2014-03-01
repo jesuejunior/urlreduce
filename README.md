@@ -42,7 +42,7 @@ Eu prefiro usar o gunicorn, mas essa configue está diretamnete no meu settings_
 Em breve estarei disponibilizando a app em produção falta apenas(tirando o tempo) adicionar no chef pra ele fazer o deploy.
 
 
-(http://urlresolve.jesuejunior.com)
+(http://urlreduce.jesuejunior.com)
 
 Vai ficar grande até eu comprar uma url micro...
 
