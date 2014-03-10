@@ -35,8 +35,6 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-# pasta temporaria usada na exportacao
-wetl/tasks/export/temp/
 
 # Arquivos do PyDev
 .pydevproject
@@ -48,36 +46,11 @@ wetl/tasks/export/temp/
 #Jpipe
 hs_err*
 
-# SIEVE
-settings_local.py
-gunicorn_local.py
-celerycam.log
-celeryd.log
-celeryev.pid
-settings_local_arq.py
-settings_local_prod.py
-static/admin
-celerybeat.pid
-
-static
-protected
-lib/include/greenlet.h
-
-#Diretorio de upload de tickets do bug
-
 nohup.out
 #logs
 *log-*.log
 *.log.*
 *.pid
-
-# Teremos apenas um symlink vindo de etc/
-./supervisord.conf
-jobs/supervisord.conf
-cdp/supervisord.conf
-
-# Fixture para testes da baseproduto
-fixtures_para_testar_baseproduto.json
 
 # Jenkins
 junit-baseproduto.xml
