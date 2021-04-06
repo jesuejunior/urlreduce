@@ -1,4 +1,4 @@
 Django==1.5.4
-django-registration==1.0
+django-registration==3.1.2
 wsgiref==0.1.2
 gunicorn==18.0
